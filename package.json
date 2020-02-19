@@ -1,0 +1,11 @@
+{
+	"name": "LagerthaBot",
+	"version": "1.0.0",
+	"description": "Lagertha - The Queen",
+	"main": "lagertha.js",
+	"author": "Kirill Shvetsov",
+	"dependencies": {
+		"discord.js": "^11.5.1",
+		"winston": "^3.2.1"
+	}
+}
