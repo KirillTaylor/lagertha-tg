@@ -4,6 +4,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const config = require('./config.json');
 
+
 function between(min, max) {  
   return Math.floor(
     Math.random() * (max - min) + min
@@ -11,7 +12,7 @@ function between(min, max) {
 }
 
 client.on('ready', () => {
-	const game = 'Not Apex Legends';
+	const game = 'Ragnarok';
 	console.log(`Logged in as ${client.user.tag}!`);
 	client.user.setStatus('available');
 	client.user.setPresence({
@@ -20,7 +21,7 @@ client.on('ready', () => {
             type: 0
         }
     });
-	client.channels.map((channel) => {
+	/* client.channels.map((channel) => {
 		if(channel.type === 'text'){
 			channel.send(`LargerthaBot reloaded. (Version ${config.version})`);
 			if(game){
@@ -28,7 +29,7 @@ client.on('ready', () => {
 			}
 			channel.send("Hit me up with !bobs or !ping");
 		}
-	});
+	}); */
 });
 
 client.on('message', msg => {
@@ -47,4 +48,37 @@ client.on('message', msg => {
 	}
 });
 
-client.login(config.token);
+client.login(config.discord.token);
+
+// Lagertha for Telegram **/
+
+const TGBot = require('node-telegram-bot-api');
+
+const bot = new TGBot(config.telegram.token, {polling: true});
+
+bot.on('message', (msg) => {
+    console.log(msg);
+    if(msg.text){
+        const parsedCMD = msg.text.substr(1);
+    
+        if (parsedCMD === 'ping') {
+            bot.sendMessage(msg.chat.id, 'Pong!');
+        }
+        if (msg.text === 'smaw'){
+            bot.sendMessage(msg.chat.id, "smiiiiii");
+        }
+        
+        if (parsedCMD === 'bobs'){
+            const randomNumber = between(1, 18);
+            bot.sendPhoto(msg.chat.id, `./bobs/${randomNumber}.jpg`);
+        }
+
+        if(msg.text.includes('azov')){
+            bot.sendMessage(msg.chat.id, `@${msg.from.username} halaasssss`);
+        }
+    }
+});
+
+bot.on('polling_error', (error) => {
+    console.log(error);  // => 'EFATAL'
+});

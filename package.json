@@ -6,6 +6,8 @@
 	"author": "Kirill Shvetsov",
 	"dependencies": {
 		"discord.js": "^11.5.1",
+		"node-telegram-bot-api": "^0.40.0",
+		"nodemon": "^2.0.2",
 		"winston": "^3.2.1"
 	}
 }
