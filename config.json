@@ -5,5 +5,7 @@
 	"telegram": {
 		"token": "330082169:AAFQUXduUZZM8yT0a3HcLwI4-3PPvRlTCV8"
 	},
-	"version": "0.1.1b"
+	"version": "0.1.3",
+	"game": "COVID-19 GOTY",
+	"randomness": "0.15"
 }
