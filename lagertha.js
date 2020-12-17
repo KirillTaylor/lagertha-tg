@@ -19,7 +19,7 @@ let rawdata = fs.readFileSync('./db.json');
 let messages = JSON.parse(rawdata);
 
 function randomMessage(){    
-    return messages.messages[between(0, messages.messages.length - 1)];
+    return messages.messages[between(0, messages.messages.length - 1)].text;
 }
 
 // bot.sendMessage(-1001393546769, `[Lagertha] Updated to version ${config.version}. \nRandomness level: ${config.randomness * 100}%`);
@@ -45,15 +45,13 @@ bot.on('message', (msg) => {
         } else if(msg.text.includes('azov')){
             bot.sendMessage(msg.chat.id, `@${msg.from.username} halaasssss`);
         } else {
-            messages.messages.push(msg.text);
-            console.log(parseFloat(config.randomness));
+            messages.messages.push(msg);
             if(Math.random() <= parseFloat(config.randomness)){
                 bot.sendMessage(msg.chat.id, randomMessage());
             }
         }
         let data = JSON.stringify(messages);
         fs.writeFileSync('./db.json', data);
-        console.log(messages);
     }
 });
 
