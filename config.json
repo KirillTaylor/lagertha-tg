@@ -1,10 +1,4 @@
 {
-	"discord": {
-		"token": "NTQyNDMyODcyOTMwNDc2MDQz.Xk2QFA.i9u3z1iv4GaN_QVzRN8h4e6Mk84"
-	},
-	"telegram": {
-		"token": "330082169:AAFQUXduUZZM8yT0a3HcLwI4-3PPvRlTCV8"
-	},
 	"version": "0.25a: Fresh Database",
 	"game": "COVID-19 GOTY",
 	"randomness": "0.05"

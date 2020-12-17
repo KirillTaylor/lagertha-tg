@@ -5,6 +5,7 @@
 	"main": "lagertha.js",
 	"author": "Kirill Shvetsov",
 	"dependencies": {
+		"dotenv": "^8.2.0",
 		"node-telegram-bot-api": "^0.40.0",
 		"nodemon": "^2.0.2",
 		"winston": "^3.2.1"

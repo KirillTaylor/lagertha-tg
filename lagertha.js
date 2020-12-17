@@ -1,3 +1,5 @@
+// load environmental variables
+require('dotenv').config();
 
 const config = require('./config.json');
 const db = require('./db.json');
@@ -13,7 +15,7 @@ function between(min, max) {
 
 const TGBot = require('node-telegram-bot-api');
 
-const bot = new TGBot(config.telegram.token, {polling: true});
+const bot = new TGBot(process.env.TELEGRAM_TOKEN, {polling: true});
 //let messages = db.messages;
 let rawdata = fs.readFileSync('./db.json');
 let messages = JSON.parse(rawdata);
