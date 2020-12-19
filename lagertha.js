@@ -2,7 +2,6 @@
 require('dotenv').config();
 
 const config = require('./config.json');
-const db = require('./db.json');
 const fs = require('fs');
 
 function between(min, max) {  
@@ -26,8 +25,7 @@ function randomMessage(){
 
 // bot.sendMessage(-1001393546769, `[Lagertha] Updated to version ${config.version}. \nRandomness level: ${config.randomness * 100}%`);
 
-bot.on('message', (msg) => {
-    console.log(msg);
+bot.on('message', async (msg) => {
     if(msg.text){
         const parsedCMD = msg.text.substr(1).split(' ');
         if (parsedCMD[0] === 'ping') {
@@ -47,6 +45,19 @@ bot.on('message', (msg) => {
         } else if(msg.text.includes('azov')){
             bot.sendMessage(msg.chat.id, `@${msg.from.username} halaasssss`);
         } else {
+            await bot.getUserProfilePhotos(msg.from.id, 0, 1).then(async function(data){
+                console.log(data);
+                const smallImage = data.photos[0].filter(img => img.width === 160)[0]; 
+                await bot.getFile(smallImage.file_id).then(function(data){
+                    const fileName = data.file_path.split('/')[1];
+                    if (!fs.existsSync(process.env.IMAGES_FOLDER + '/' + fileName)) {
+                        bot.downloadFile(data.file_id, process.env.IMAGES_FOLDER);
+                        msg.from.profilePicture = fileName;
+                    }
+                });                
+            });
+
+            console.log(msg);
             messages.messages.push(msg);
             if(Math.random() <= parseFloat(config.randomness)){
                 bot.sendMessage(msg.chat.id, randomMessage());
